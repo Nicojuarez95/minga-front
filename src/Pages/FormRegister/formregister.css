@@ -41,6 +41,7 @@ fieldset input{
     letter-spacing: 0.05em;
     color: #1F1F1F;
     gap: 5px;
+    width: 100%;
 }
 #sign-up{
     width: 408px;

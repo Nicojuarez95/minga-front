@@ -1,31 +1,35 @@
-import React, { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import Auth from '../Auth/Auth';
-import Hero1 from '../Hero1/Hero1';
-import Hero2Register from '../Hero2Register/Hero2Register';
+import React from 'react'
+import Hero1 from '../Hero1/Hero1'
+import Hero2Register from '../Hero2Register/Hero2Register'
+import { useState } from 'react'
+import { useLocation } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import Auth from '../Auth/Auth'
 
 export default function Index() {
-  const { pathname } = useLocation();
+  const location = useLocation();
   const navigate = useNavigate();
-  const [view, setView] = useState('register');
 
-  const handleViewChange = () => {
-    if (pathname === '/signup') {
-      setView('login');
-      navigate('/signin');
-    } else if (pathname === '/signin') {
-      setView('register');
-      navigate('/signup');
+  const { pathname } = location;
+  const [render, setRender] = useState(false);
+
+  const handleRender = () => {
+    if (pathname === "/") {
+      setRender(!render);
+    } else if (pathname === "/signup") {
+      navigate("/signin");
+    } else if (pathname === "/signin") {
+      navigate("/signup");
     }
   };
 
   return (
     <>
       <Hero1 />
-      {view === 'register' ? (
-        <Hero2Register handleViewChange={handleViewChange} />
+      {render ? (
+        <Auth handleRender={handleRender} />
       ) : (
-        <Auth handleViewChange={handleViewChange} />
+        <Hero2Register handleRender={handleRender} />
       )}
     </>
   );

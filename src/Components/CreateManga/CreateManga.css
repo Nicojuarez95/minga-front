@@ -5,12 +5,12 @@
 }
 h1 {
     display: flex;
-    font-size: 1.5rem;
+    font-size: 2.2rem;
     align-items: center;
     justify-content: center;
     text-align: center;
     color:#4338CA;
-    
+    font-weight: 400;
 }
 .content-form {
     width: 100vw;
@@ -20,13 +20,12 @@ h1 {
     justify-content: center;
     align-items: center;
     align-content: center;
-
 }
+
 
 .fieldsetMove {
     border: none;
     display: flex;
-    width: 70vw;
     border-radius: 0;
     margin: 0;
     padding: 0;
@@ -34,33 +33,39 @@ h1 {
 
 }
 
+form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .inputMove {
     border-radius: 0;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid rgb(43, 10, 226);
+    width: 100%;
 }
 #selectMove {
     border: 0;
-    width: 68vw;
     color: gray;
     font-size: 0.9rem;
+    width: 100%;
     background-color: transparent;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid rgb(17, 20, 233);
 }
 
 .btn-manga {
     background: #4338CA;
     border-radius: 3rem  ;
     border: 1px solid #4338CA;
-    width: 68vw;
+    width: 300px;
     height: 2.5rem;
     font-family: Roboto;
     font-size: 24px;
     font-weight: 700;
     line-height: 28px;
     letter-spacing: 0em;
-    text-align: center;
     color: white;
+    font-weight: 400;
     font-size: 1.2rem;
-
-
 }
+

@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import { useRef } from 'react';
 import './CreateManga.css';
 import axios from 'axios';
-import Swal from 'sweetalert2'
+import {useDispatch, useSelector} from 'react-redux'
+import alertActions from "../../store/Alert/actions";
+const {open} = alertActions
 
 export default function CreateManga() {
     const [categories, setCategories] = useState([]);
@@ -11,7 +13,10 @@ export default function CreateManga() {
     let category = useRef();
     let description = useRef();
     let cover_photo = useRef();
-    const isDisabled = categoria == null;
+    const form = useRef();
+    const store = useSelector(store=>store)
+    let dispatch = useDispatch()
+
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -21,52 +26,47 @@ export default function CreateManga() {
             description: description.current.value,
             cover_photo: cover_photo.current.value,
             category_id: filteredCategory._id,
-
+            author_id: "640b33c55b1f46e6dfc8b91c"
         };
-        const Toast = Swal.mixin({
-            toast: true,
-            position: "top-end",
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-            toast.addEventListener("mouseenter", Swal.stopTimer);
-            toast.addEventListener("mouseleave", Swal.resumeTimer);
-            },
-        });
+        
 
-        // console.log(manga);
-        const url = 'http://localhost:8000/mangas';
+        const url = 'http://localhost:8000/createmanga';
         let token = localStorage.getItem('token')
         let headers = { headers: { 'Authorization': `Bearer ${token}` } }
         
         try {
             await axios.post(url, manga, headers, {
             });
-            Toast.fire({
-                icon: "success",
-                title: "Manga created successfully",
-            });
-            
+            let dataAlert = {
+                icon: 'success',
+                title: "Manga created successfully"
+              }
+              dispatch(open(dataAlert))
+            form.current.reset()
         } catch (error) {
-            Toast.fire ({
-                icon: "error",
-                title: "This title already exist"
-            });
-              // console.log('ocurrio un error');
+            let dataAlert = {
+                icon: 'error',
+                title: error.response.data.message
+              }
+              dispatch(open(dataAlert))
         }
     }
 
     async function renderCategory() {
-        await axios.get('http://localhost:8000/mangas').then((response) => { setCategories(response.data.categories) })
-    }
+        try {
+          const response = await axios.get("http://localhost:8000/createmanga");
+          setCategories(response.data.categories);
+        } catch (error) {
+          console.log(error);
+        }
+      }
 
 
 
     return (
         <div className='content-form'>
             <h1>New Manga</h1>
-            <form onSubmit={handleSubmit}>
+            <form ref={form} onSubmit={handleSubmit}>
                 <fieldset className='fieldsetMove'>
                     <input className='inputMove' type='text' placeholder='Insert title' ref={title} />
                 </fieldset>

@@ -16,7 +16,7 @@ export default function Header() {
     <header>
         <NavButton onClick={handleRender}/>
         {render && <NavIndex handleRender={handleRender}/>}
-        <img src="./LogoM.png" alt="Logo" />
+        <img src="/LogoM.png" alt="Logo" />
     </header>
   )
 }

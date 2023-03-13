@@ -22,14 +22,14 @@ export default function Foother() {
             <a href="">Comics</a>
           </div>
 
-          <img id='img-footer' src="./Logomr.png" alt="" />
+          <img id='img-footer' src="/Logomr.png" alt="" />
 
           <div className='cont-icono-boton'>
             <div className='iconos-footer'>
-              <img src="./Facebook.png" alt="fb" />
-              <img src="Twitter.png" alt="tw" />
-              <img src="Vimeo.png" alt="vm" />
-              <img src="Youtube.png" alt="yt" />
+              <img src="/Facebook.png" alt="fb" />
+              <img src="/Twitter.png" alt="tw" />
+              <img src="/Vimeo.png" alt="vm" />
+              <img src="/Youtube.png" alt="yt" />
             </div>
             <BotonSeccion1Hero1 text="Donate"/>
           </div>

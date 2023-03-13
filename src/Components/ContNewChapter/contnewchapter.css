@@ -1,0 +1,41 @@
+.cont-dad-chapter{
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    background-color: #EBEBEB;
+    align-items: center;
+    justify-content: center;
+}
+.cont-new-chapter{
+    display: flex;
+    flex-direction: column;
+    min-width: 60%;
+    text-align: center;
+}
+.input-chapter{
+    width: 100%;
+    border: 0;
+    padding: 5px;
+    /* padding-bottom: 10px; */
+    border-bottom: 2px solid #424242;
+    background-color: transparent;
+}
+
+.submit-chapter{
+    background-color: #4338CA;
+    color: white;
+    padding: 10px;
+    border-radius: 20px;
+    width: 250px;
+    border: transparent;
+}
+.form-new-chapter{
+    display: flex;
+    align-items: center;
+}
+@media (min-width: 768px){
+    .cont-new-chapter{
+        min-width: 500px;
+    }
+
+}

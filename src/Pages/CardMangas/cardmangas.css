@@ -1,0 +1,124 @@
+ /* carta shonen */
+ .kodomoBarr{
+    width: 7px;
+    height: 130px;
+    background-color:#8883F0;
+    margin-top: 22px;
+  }
+  .shojoBarr{
+    width: 7px;
+    height: 130px;
+    background-color:#00BA88;
+    margin-top: 22px;
+  }
+  .seinenBarr{
+    width: 7px;
+    height: 130px;
+    background-color:#FC9C57;
+    margin-top: 22px;
+  }
+  .shonenBarr{
+    width: 7px;
+    height: 130px;
+    background-color:#EF8481;
+    margin-top: 22px;
+  }
+  .cart-shonen{
+    display: flex;
+    height: 180px;
+    min-width: 28%;
+    border: 1px solid gray;
+    border-radius: 10px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.03);        
+  }
+  .text{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    padding-left: 10px;
+    justify-content: center;
+    width: 50%;
+    gap: 40px;
+  }
+  .kodomo{
+    color: #8883F0;
+  }
+  .shojo{
+    color: #00BA88;
+  }
+  .seinen{
+    color: #FC9C57;
+  }
+  .shonen{
+    color: #EF8481;
+  }
+  .text a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 92px;
+    height: 35px;
+    border-radius: 50px;
+    background-color: #D1FBF0;
+    color: #00BA88;
+    margin-left: 0px;
+    margin-bottom: -40px;
+  }
+  .text a:hover{
+    background-color: #9cd8c8;
+    color: #ffffff;
+    box-shadow: 0 0 10px black;
+  }
+  .img-cart{
+    width: 50%;
+  }
+
+  .imgManga{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius:35% 10px 10px 35%;
+  }
+
+  @media (min-width: 320px) and (max-width: 692px) {
+    .text a{
+        margin-left: 0px;
+        margin-bottom: -20px;
+      }
+    .text{
+        padding-left: 10px;    
+        gap: 30px;
+      }
+      .cart-shonen{
+        width: 85%;
+      } 
+     
+}
+
+@media (min-width: 692px) and (max-width: 1300px) {
+    .cart-shonen{
+        width: 45%;
+      } 
+      .text a{
+        margin-left: 0px;
+        margin-bottom: -20px;
+      }
+      .text{
+        padding-left: 10px;    
+        gap: 30px;
+      }
+}
+
+@media (min-width: 1301px) and (max-width: 1500px) {
+    .cart-shonen{
+        width: 45%;
+      }
+}
+
+@media (min-width: 1501px) and (max-width: 1950px) {
+    .cart-shonen{
+        width: 25%;
+      }
+}
+    
+   

@@ -5,7 +5,7 @@ export default function NavButton(props) {
 
   return (
     <i onClick={props.onClick}>
-        <img id='hamburguesa' src="./menu.png" alt="" />
+        <img id='hamburguesa' src="/menu.png" alt="" />
     </i>
   )
 }

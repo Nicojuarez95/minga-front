@@ -4,7 +4,9 @@ import { useRef } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Link as Anchor, useLocation } from "react-router-dom";
-import Swal from "sweetalert2";
+import {useDispatch, useSelector} from 'react-redux'
+import alertActions from "../../store/Alert/actions.js";
+const {open} = alertActions
 
 export default function FormRegister(props) {
   let name = useRef();
@@ -15,19 +17,8 @@ export default function FormRegister(props) {
   let navigate = useNavigate();
   let location = useLocation();
   let { pathname } = location;
-
-
-  const Toast = Swal.mixin({
-    toast: true,
-    position: "top-end",
-    showConfirmButton: false,
-    timer: 3000,
-    timerProgressBar: true,
-    didOpen: (toast) => {
-      toast.addEventListener("mouseenter", Swal.stopTimer);
-      toast.addEventListener("mouseleave", Swal.resumeTimer);
-    },
-  });
+  const store = useSelector(store=>store)
+  let dispatch = useDispatch()
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -38,20 +29,37 @@ export default function FormRegister(props) {
       [password.current.name]: password.current.value,
       [photo.current.name]: photo.current.value,
     };
+    
 
     let url = "http://localhost:8000/auth/signup";
 
     try {
       await axios.post(url, data);
-      Toast.fire({
-        icon: "success",
-        title: "Signed in successfully",
-      });
+      let dataAlert = {
+        icon: 'success',
+        title: "Signed in successfully"
+      }
+      dispatch(open(dataAlert))
+      
       formregister.current.reset();
       navigate("/signin");
     } catch (error) {
-      console.log(error);
-      Swal.fire(error.response.data.message[0]);
+      if (typeof error.response.data.message === "string") {
+        let dataAlert = {
+          icon: 'error',
+          title: error.response.data.message
+        }
+        dispatch(open(dataAlert))
+      } else {
+        let dataAlert = {
+          icon: 'error',
+          title: "",
+        }
+        error.response.data.message.forEach((err) => {
+          dataAlert.title += err + '\n'
+        });
+        dispatch(open(dataAlert));
+      }
     }
   }
 
@@ -65,7 +73,7 @@ export default function FormRegister(props) {
 
       <fieldset>
         <legend>Email</legend>
-        <input ref={email} type="email" id="email" name="email" required />
+        <input ref={email} type="email" id="email" name="mail" required />
         <img src="./@.png" alt="" />
       </fieldset>
 

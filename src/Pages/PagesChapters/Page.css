@@ -1,0 +1,104 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+.mover {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+}
+.imgChapter {
+    height: 70vh;
+    width: 50vw;
+}
+
+.div-chapter2 {
+    background-color: #4338CA;
+    border-top: 1px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5rem;
+    height: 3rem;
+}
+
+.parrafo-chapter2 {
+    color: white;
+}
+
+.contenedor-capitulos {
+    height: 70vh;
+    display: flex;
+    justify-content: center;
+}
+
+.boton-back {
+    z-index: 1;
+    width: 30%;
+    height: 100%;
+    background: transparent;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    border: none;
+}
+
+.boton-next {
+    position: relative;
+    width: 30%;
+    height: 100%;
+    background: transparent;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    border: none;
+
+}
+
+.posi {
+    position: absolute;
+    height: 50vh;
+    width: 50vw;
+}
+
+.div-chapter3 {
+    background: #dbd9d9;
+    padding: 0.6rem;
+    margin-top: 1rem;
+
+}
+
+.chapter3 {
+    display: flex;
+    justify-content: center;
+}
+
+.parrafo-chapter3 {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    color: black
+}
+
+.comment {
+    width: 2rem;
+}
+
+.icono-flecha {
+    font-size: 20px;
+    color: #000;
+    position: relative;
+    top: 5px;
+    left: 5px;
+}
+
+.flecha {
+    width: 2rem
+}
+
+.flecha:hover {
+    width: 3rem;
+}

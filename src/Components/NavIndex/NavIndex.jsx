@@ -3,12 +3,16 @@ import './navindex.css'
 import { useEffect } from 'react';
 import axios from 'axios';
 import {Link as Anchor} from 'react-router-dom'
-import Swal from 'sweetalert2';
+import {useDispatch, useSelector} from 'react-redux'
+import alertActions from '../../store/Alert/actions.js';
+const {open} = alertActions
 
 export default function NavIndex({handleRender}) {
     let token = localStorage.getItem(`token`)
     let headers = {headers:{'Authorization':`Bearer ${token}`}}
-    let url = "http://localhost:8000/auth/signintoken"
+    let url = "http://localhost:8000/auth/signout"
+    const store = useSelector(store=>store)
+    let dispatch = useDispatch()
 
     if(!token){
         localStorage.setItem(`user`, JSON.stringify({
@@ -22,6 +26,7 @@ export default function NavIndex({handleRender}) {
     let name= user.name
     let email= user.email
     let photo= user.photo
+    console.log(JSON.parse(localStorage.getItem(`user`)))
 
     useEffect(()=>{
         let url= "http://localhost:8000/auth/signintoken"
@@ -31,43 +36,34 @@ export default function NavIndex({handleRender}) {
         }
     })
 
-    const Toast = Swal.mixin({
-        toast: true,
-        position: "top-end",
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-          toast.addEventListener("mouseenter", Swal.stopTimer);
-          toast.addEventListener("mouseleave", Swal.resumeTimer);
-        },
-      });
-
       async function handleLogout() {
         try {
           await axios.post(url, "", headers);
-          Toast.fire({
-            icon: "success",
-            title: "Logout successfully",
-          });
+          let dataAlert = {
+            icon: 'success',
+            title: "Logout successfully"
+          }
+          dispatch(open(dataAlert))
+          
           localStorage.setItem("token", "");
           localStorage.setItem("user", "");
           handleRender();
         } catch (error) {
-          if (typeof error.response.data.message === "string") {
-            Swal.fire({
-              icon: "error",
-              title: "Oops...",
-              text: error.response.data.message,
-            });
-          } else {
-            error.response.data.message.forEach((err) =>
-              Swal.fire({
-                icon: "error",
-                title: "Oops...",
-                text: error.response.data.message,
-              })
-            );
+            if (typeof error.response.data.message === "string") {
+              let dataAlert = {
+                icon: 'error',
+                title: error.response.data.message
+              }
+              dispatch(open(dataAlert))
+            } else {
+                let dataAlert = {
+                  icon: 'error',
+                  title: "",
+                }
+                error.response.data.message.forEach((err) => {
+                  dataAlert.title += err + '\n'
+                });
+                dispatch(open(dataAlert));
           }
         }
       }
@@ -88,14 +84,15 @@ export default function NavIndex({handleRender}) {
                             : ""
                 }
 
-                <img className='equis' src="./union.png" alt="" onClick={handleRender}/>  
+                <img className='equis' src="/union.png" alt="" onClick={handleRender}/>  
             </div>
 
             <div className='ancors-nav'>
-                <a href="">Home</a>
-                <a href="">Mangas</a>
-                <a href="">My Mangas</a>
-                <a href="">Favourites</a>
+                <Anchor to="/">Home</Anchor>
+                <Anchor to="/mangas">Mangas</Anchor>
+                <Anchor to="/createmanga">My mangas</Anchor>
+                <Anchor to="#">Favorites</Anchor>
+                { token ? <Anchor to="/author">Author</Anchor> : ""}
                 { token ? <Anchor onClick={handleLogout}>Logout</Anchor> : ""}
             </div>
         </nav>
